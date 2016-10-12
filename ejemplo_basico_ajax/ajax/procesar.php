@@ -11,7 +11,8 @@
 			fclose($archivo);
 			break;
 		case 'obtener':
-			$archivo = fopen("log_usuarios.csv","r"); //Nombre archivo, modo de apertura: r, w, a
+			$archivo = fopen("../data/aplicaciones.csv","r");
+
 			while($linea = fgets($archivo))
 				echo $linea."<br>";
 
