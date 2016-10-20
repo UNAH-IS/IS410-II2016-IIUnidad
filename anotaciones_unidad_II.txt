@@ -1,0 +1,42 @@
+Gestion de bases de datos:
+
+Structure Query Language
+-Data Definition Language
+    Crear, eliminar o modificar estructuras de datos
+    CREATE, ALTER, DROP
+-Data Manipulation Language
+    Agregar, eliminar o modificar registros (Informacion)
+    INSERT, UPDATE, DELETE
+-Query Language
+	Consultar informacion
+    SELECT
+
+
+ Insertar informacion
+ INSERT INTO tbl_categorias (codigo_categoria, nombre_categoria) VALUES 	(NULL, 'Juegos'), 
+ 			(NULL, 'Social'),
+ 			(NULL, 'Educacion'), 
+ 			(NULL, 'Casual');
+
+INSERT INTO TBL_CATEGORIAS(CODIGO_CATEGORIA, NOMBRE_CATEGORIA)
+VALUES (null, 'Musica');
+
+INSERT INTO TBL_CATEGORIAS(CODIGO_CATEGORIA, NOMBRE_CATEGORIA)
+VALUES (null, 'Musica');
+
+
+ INSERT INTO TABLA (CAMPOS)
+ VALUES (VALORES)
+
+
+
+ UPDATE tbl_categorias 
+ SET 	nombre_categoria = 'Zocial' 
+ WHERE  NOMBRE_CATEGORIA = 'Social';
+
+
+UPDATE TABLA
+SET CAMPO1 = NUEVO_VALOR_1,
+	CAMPO2 = NUEVO_VALOR_2,...
+	CAMPON = NUEVO_VALOR_N
+WHERE CONDICION;
