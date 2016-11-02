@@ -1,10 +1,13 @@
 <?php
+	include_once("class/class_conexion.php");
+	include_once("class/class_categoria.php");
 	include_once("class/class_producto.php");
 	include_once("class/class_aplicacion.php");
 	include_once("class/class_icono.php");
 	include_once("class/class_usuario.php");
 	include_once("class/class_desarrollador.php");
 	include_once("class/class_comentario.php");
+	$conexion = new Conexion();
 
 	$iconos[]=new Icono("http://localhost/playstore/img/icono1.png",100,100);
 	$iconos[]=new Icono("http://localhost/playstore/img/icono2.png",100,100);
@@ -26,11 +29,7 @@
 	$desarrolladores[] = new Desarrollador("Desarrollador 4", "desarrollador1@gmail.com","http://desarrollador.com");
 	$desarrolladores[] = new Desarrollador("Desarrollador 5", "desarrollador1@gmail.com","http://desarrollador.com");
 	
-	$categorias[] = "Categoria 1";
-	$categorias[] = "Categoria 2";
-	$categorias[] = "Categoria 3";
-	$categorias[] = "Categoria 4";
-	$categorias[] = "Categoria 5";
+	
 	
 	$estatus[] = "Estatus 1";
 	$estatus[] = "Estatus 2";
@@ -105,7 +104,7 @@
 	</nav>
 
 
-	<div class="alert alert-success" role="alert">
+	<div class="alert alert-success" role="alert" id= "resultado">
 		<!-- Imprimir en esta seccion las verificaciones.-->
 	</div>
 	<div class="container-fluid">
@@ -168,10 +167,7 @@
 						<td>Categorias:</td>
 						<td>
 							<?php
-								for($i=0;$i<count($categorias);$i++)
-									echo '<label><input type="checkbox" name="chk-categorias[]" 
-									value="'.$categorias[$i].'">'.$categorias[$i].'</label><br>';
-							
+								Categoria::generarCheckboxesCategoria($conexion);
 							?>
 						</td>
 					</tr>
@@ -190,12 +186,11 @@
 					<tr>
 						<td>Desarrollador:</td>
 						<td>
-							<select name="" id="slc-desarrollador" class="form-control">
 								<?php 
-									for ($i=0;$i<count($desarrolladores);$i++)
+									Desarrollador::generarListaDesarrolladores($conexion);
+									/*for ($i=0;$i<count($desarrolladores);$i++)
 										echo '<option value="'.$desarrolladores[$i]->getNombreUsuario().'">'.$desarrolladores[$i]->getNombreUsuario().'</option>';
-								?>	
-							</select>
+								*/?>								
 						</td>
 					</tr>
 					<tr>

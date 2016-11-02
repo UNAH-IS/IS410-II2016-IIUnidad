@@ -1,5 +1,12 @@
 $(document).ready(function(){
 	$("#btn-guardar").click(function(){
+		var categoriasSeleccionadas="";
+		
+		$("input[name='chkcategorias[]']:checked").each(function(){
+			categoriasSeleccionadas+="categorias[]="+$(this).val()+"&";
+		});
+
+		//Otra forma de enviar la inforamcion es con FormData
 		var parametros=
 			"txt-aplicacion="+$("#txt-aplicacion").val()+
 			"&txt-descripcion="+$("#txt-descripcion").val()+
@@ -8,19 +15,19 @@ $(document).ready(function(){
 			"&txt-calificacion="+$("#txt-calificacion").val()+
 			"&txt-url="+$("#txt-url").val()+
 			"&txt-tamanio="+$("#txt-tamanio").val()+
-			//"&chk-categorias[]="+$("input[@name='chk-categorias[]']").val()+
-			"&txt-version="+$("#txt-version").val()+
+			"&"+categoriasSeleccionadas+
+			"txt-version="+$("#txt-version").val()+
 			"&slc-desarrollador="+$("#slc-desarrollador").val()+
 			"&slc-icono="+$("#slc-icono").val();
 
-		//alert(parametros);
+		alert(parametros);
 		//$.post $.get
 		$.ajax({
 			url:"ajax/acciones.php?accion=1",
 			method: "POST",
 			data: parametros,
 			success:function(resultado){
-				alert(resultado);
+				$("#resultado").html(resultado);
 				cargarTarjetas();
 			},
 			error:function(){

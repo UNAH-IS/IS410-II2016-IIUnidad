@@ -14,11 +14,14 @@
 			$version,
 			$fechaActualizacion,
 			$desarrollador*/
+			include_once("../class/class_conexion.php");
 			include_once("../class/class_producto.php");
 			include_once("../class/class_icono.php");
 			include_once("../class/class_usuario.php");
 			include_once("../class/class_desarrollador.php");
 			include_once("../class/class_aplicacion.php");
+
+			$conexion = new Conexion();
 			$aplicacion = new Aplicacion(
 					$_POST["txt-aplicacion"],
 					$_POST["txt-descripcion"],
@@ -28,14 +31,16 @@
 					$_POST["txt-url"],
 					$_POST["txt-tamanio"],
 					new Icono($_POST["slc-icono"],5,5),
-					null,//Categorias
+					$_POST["categorias"],//Categorias
 					null,//Estatus
 					$_POST["txt-version"],
 					$_POST["txt-fecha-actualizacion"],
 					new Desarrollador($_POST["slc-desarrollador"], null,null)
 			);
 
-			$aplicacion->guardarRegistro();
+			echo "Categorias: " . var_dump($_POST["categorias"]);
+
+			$aplicacion->guardarRegistro($conexion);
 			break;
 		case '2':
 			include_once("../class/class_conexion.php");

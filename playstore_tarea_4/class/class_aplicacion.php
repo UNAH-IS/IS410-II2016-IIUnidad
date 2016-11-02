@@ -73,8 +73,33 @@
 				" Desarrollador: " . $this->desarrollador->toString();
 		}
 
-		public function guardarRegistro(){
-			$archivo = fopen("../data/aplicaciones.csv","a");
+		public function guardarRegistro($conexion){
+			$sql = sprintf(
+				"INSERT INTO tbl_aplicaciones 
+						(
+							codigo_aplicacion, codigo_desarrollador,
+							 nombre_aplicacion, descripcion,
+							  fecha_publicacion, fecha_actualizacion, 
+							  version, url, url_icono, calificacion
+						) VALUES (
+							NULL, '%s', '%s', '%s', '%s', '%s', 
+							'%s', '%s', '%s', '%s'
+						)",
+						stripslashes($this->desarrollador->getNombreUsuario()),
+						stripslashes($this->nombreProducto),
+						stripslashes($this->descripcion),
+						stripslashes($this->fechaPublicacion),
+						stripslashes($this->fechaActualizacion),
+						stripslashes($this->version),
+						stripslashes($this->URLProducto),
+						stripslashes($this->icono->getURLImagen()),
+						stripslashes($this->calificacionPromedio)
+				);
+			echo $sql;
+			$conexion->ejecutarInstruccion($sql);
+
+
+			/*$archivo = fopen("../data/aplicaciones.csv","a");
 			fwrite(
 				$archivo,
 				$this->nombreProducto.",".
@@ -87,7 +112,7 @@
 				$this->desarrollador->getNombreUsuario().",".
 				$this->icono->getURLImagen()."\n"
 			);
-			fclose($archivo);
+			fclose($archivo);*/
 		}
 	}
 

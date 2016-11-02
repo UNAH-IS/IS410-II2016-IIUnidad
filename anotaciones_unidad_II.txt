@@ -28,15 +28,40 @@ VALUES (null, 'Musica');
  INSERT INTO TABLA (CAMPOS)
  VALUES (VALORES)
 
-
+---Actualizar registros
 
  UPDATE tbl_categorias 
  SET 	nombre_categoria = 'Zocial' 
  WHERE  NOMBRE_CATEGORIA = 'Social';
 
+UPDATE tbl_categorias 
+ SET 	nombre_categoria = 'Zocial' 
+ WHERE  CODIGO_CATEGORIA = 1;
 
 UPDATE TABLA
 SET CAMPO1 = NUEVO_VALOR_1,
 	CAMPO2 = NUEVO_VALOR_2,...
 	CAMPON = NUEVO_VALOR_N
 WHERE CONDICION;
+
+-----Eliminar registros
+
+DELETE FROM tbl_categorias 
+WHERE codigo_categoria = 5;
+
+Otra forma de limpiar o eliminar TODOS los registros de una tabla
+TRUNCATE TABLE	tbl_categorias;  --DDL
+
+
+Consultas:
+SELECT * 
+FROM `tbl_categorias`;
+
+
+SELECT nombre_categoria
+FROM tbl_categorias;
+
+SELECT *
+FROM nombre_tabla;
+
+
