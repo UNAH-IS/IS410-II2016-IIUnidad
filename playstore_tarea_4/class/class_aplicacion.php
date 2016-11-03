@@ -85,7 +85,7 @@
 							NULL, '%s', '%s', '%s', '%s', '%s', 
 							'%s', '%s', '%s', '%s'
 						)",
-						stripslashes($this->desarrollador->getNombreUsuario()),
+						stripslashes($this->desarrollador->getNombreUsuario()),//mysqli_magic_quotes, mysqli_real_....
 						stripslashes($this->nombreProducto),
 						stripslashes($this->descripcion),
 						stripslashes($this->fechaPublicacion),
@@ -95,9 +95,32 @@
 						stripslashes($this->icono->getURLImagen()),
 						stripslashes($this->calificacionPromedio)
 				);
-			echo $sql;
-			$conexion->ejecutarInstruccion($sql);
+			echo "<br>Instruccion a ejecutar: ".$sql;
+			$resultado = $conexion->ejecutarInstruccion($sql);
+			if($resultado){
+				echo "<b>Registro almacenado con exito</b>";
+			}else{
+				echo "Error al guardar el registro";
+				exit;
+			}
+			//Es necesario obtener el ultimo ID agregado:
+			$resultado = $conexion->ejecutarInstruccion("SELECT last_insert_id() as id;");
+			$fila = $conexion->obtenerFila($resultado);
 
+			//Las categorias es un arreglo que contiene los codigos de las categorias que 
+			//selecciono el usuario. Por cada categoria tendria
+			//que guardar un registro
+			if ($fila["id"]>0){
+				for ($i=0;$i<count($this->categoria);$i++){
+					$sql = sprintf(
+						"INSERT INTO tbl_categorias_x_aplicacion(codigo_categoria, 
+									codigo_aplicacion) VALUES ('%s','%s')",
+						stripslashes($this->categoria[$i]),
+						stripslashes($fila["id"])						
+					);
+					$conexion->ejecutarInstruccion($sql);
+				}
+			}
 
 			/*$archivo = fopen("../data/aplicaciones.csv","a");
 			fwrite(

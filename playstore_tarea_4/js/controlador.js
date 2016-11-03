@@ -1,3 +1,19 @@
+function actualizarAplicacion(codigoAplicacion){
+	alert("Aplicacion a actualizar:" + codigoAplicacion);
+	
+	$.ajax({
+			url:"ajax/acciones.php?accion=3",
+			method: "POST",
+			data: parametros,
+			success:function(resultado){
+				$("#resultado").html(resultado);
+				cargarTarjetas();
+			},
+			error:function(){
+
+			}
+	});
+} 	
 $(document).ready(function(){
 	$("#btn-guardar").click(function(){
 		var categoriasSeleccionadas="";
@@ -5,6 +21,7 @@ $(document).ready(function(){
 		$("input[name='chkcategorias[]']:checked").each(function(){
 			categoriasSeleccionadas+="categorias[]="+$(this).val()+"&";
 		});
+
 
 		//Otra forma de enviar la inforamcion es con FormData
 		var parametros=
@@ -50,3 +67,4 @@ $(document).ready(function(){
 	}
 	cargarTarjetas();
 });
+

@@ -31,7 +31,7 @@
 					$_POST["txt-url"],
 					$_POST["txt-tamanio"],
 					new Icono($_POST["slc-icono"],5,5),
-					$_POST["categorias"],//Categorias
+					$_POST["categorias"],//Categorias, esto es un arregla
 					null,//Estatus
 					$_POST["txt-version"],
 					$_POST["txt-fecha-actualizacion"],
@@ -69,6 +69,9 @@
 						<?php echo $fila["descripcion"]; ?><br>
 						Versión: <b><?php echo $fila["version"]; ?></b><br>
 						<a href="<?php echo $fila["url"]; ?>">Descargar</a>
+						<br>
+						<span class="glyphicon glyphicon-pencil" onclick="actualizarAplicacion(<?php echo $fila["codigo_aplicacion"]; ?>)" aria-hidden="true"></span>
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
 					</div>
 				</div>
 				<?php
