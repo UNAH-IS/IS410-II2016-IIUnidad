@@ -1,13 +1,13 @@
 function actualizarAplicacion(codigoAplicacion){
-	alert("Aplicacion a actualizar:" + codigoAplicacion);
 	
 	$.ajax({
 			url:"ajax/acciones.php?accion=3",
 			method: "POST",
-			data: parametros,
+			data: "codigo_aplicacion="+codigoAplicacion,
+			dataType: 'json',
 			success:function(resultado){
-				$("#resultado").html(resultado);
-				cargarTarjetas();
+				$("#txt-aplicacion").val(resultado.nombre_aplicacion);
+				$("#txt-descripcion").val(resultado.descripcion);
 			},
 			error:function(){
 

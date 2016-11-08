@@ -78,6 +78,26 @@
 			}
 			
 			break;
+		case '3':
+			include_once("../class/class_conexion.php");
+			$conexion = new Conexion();
+			$resultado = $conexion->ejecutarInstruccion(
+					sprintf(
+						'SELECT 	a.codigo_aplicacion, a.codigo_desarrollador, 
+									a.nombre_aplicacion,a.descripcion, 
+									a.fecha_publicacion, a.fecha_actualizacion, 
+									a.version, a.url, a.url_icono, a.calificacion, b.usuario
+						FROM tbl_aplicaciones a
+						INNER JOIN tbl_usuarios b
+						ON (a.codigo_desarrollador = b.codigo_usuario)
+						WHERE a.codigo_aplicacion=%s',
+						stripslashes($_POST["codigo_aplicacion"])
+					)
+			);
+
+			$fila = $conexion->obtenerFila($resultado);
+			echo json_encode($fila);
+			break;
 		default:
 			# code...
 			break;
