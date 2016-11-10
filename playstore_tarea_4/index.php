@@ -117,6 +117,8 @@
 						<td>Nombre aplicación:</td>
 						<td>
 							<input type="text" name="" id="txt-aplicacion" class="form-control">
+							<input type="hidden" name="" id="txt-codigo-aplicacion" class="form-control">
+
 						</td>
 					</tr>
 					<tr>
@@ -144,13 +146,13 @@
 						</td>
 
 					</tr>
-					<tr>
+					<!--tr>
 						<td>Tamaño archivo:</td>
 						<td>
 							<input type="text" name="" id="txt-tamanio" class="form-control">
 						</td>
 
-					</tr>
+					</tr-->
 					<tr>
 						<td>Icono:</td>
 						<td>
@@ -162,8 +164,7 @@
 							</select>
 						</td>
 					</tr>
-					<tr>
-					
+					<tr>				
 						<td>Categorias:</td>
 						<td>
 							<?php
@@ -198,8 +199,11 @@
 							<button id="btn-guardar" class="btn btn-primary">
 								Guardar
 							</button>
-							<button id="btn-limpiar" class="btn btn-warning">
-								Limpiar
+							<button id="btn-actualizar" class="btn btn-primary" style="display:none;">
+								Actualizar
+							</button>
+							<button id="btn-cancelar" class="btn btn-warning">
+								Cancelar
 							</button>
 						</td>
 					</tr>

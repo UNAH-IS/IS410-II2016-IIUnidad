@@ -137,6 +137,57 @@
 			);
 			fclose($archivo);*/
 		}
+
+
+		public function actualizarRegistro($conexion, $codigoAplicacion){
+			$sql = sprintf(
+					"UPDATE tbl_aplicaciones 
+					SET codigo_desarrollador='%s',
+						nombre_aplicacion='%s',
+						descripcion='%s',
+						fecha_publicacion='%s',
+						fecha_actualizacion='%s',
+						version='%s',
+						url='%s',
+						url_icono='%s',
+						calificacion='%s'
+					WHERE codigo_aplicacion = '%s'",
+						stripslashes($this->desarrollador->getNombreUsuario()),//mysqli_magic_quotes, mysqli_real_....
+						stripslashes($this->nombreProducto),
+						stripslashes($this->descripcion),
+						stripslashes($this->fechaPublicacion),
+						stripslashes($this->fechaActualizacion),
+						stripslashes($this->version),
+						stripslashes($this->URLProducto),
+						stripslashes($this->icono->getURLImagen()),
+						stripslashes($this->calificacionPromedio),
+						stripslashes($codigoAplicacion)
+				);
+			echo "<br>Instruccion a ejecutar: ".$sql;
+			$resultado = $conexion->ejecutarInstruccion($sql);
+			if($resultado){
+				echo "<b>Registro actualizado con exito</b>";
+			}else{
+				echo "Error al actualizar el registro";
+				exit;
+			}
+			
+
+			//Las categorias es un arreglo que contiene los codigos de las categorias que 
+			//selecciono el usuario. Por cada categoria tendria
+			//que guardar un registro
+			/*if ($fila["id"]>0){
+				for ($i=0;$i<count($this->categoria);$i++){
+					$sql = sprintf(
+						"INSERT INTO tbl_categorias_x_aplicacion(codigo_categoria, 
+									codigo_aplicacion) VALUES ('%s','%s')",
+						stripslashes($this->categoria[$i]),
+						stripslashes($fila["id"])						
+					);
+					$conexion->ejecutarInstruccion($sql);
+				}
+			}*/
+		}
 	}
 
 	
