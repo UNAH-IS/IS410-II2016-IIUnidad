@@ -29,7 +29,7 @@
 					$_POST["txt-calificacion"],
 					null,//Comentarios
 					$_POST["txt-url"],
-					$_POST["txt-tamanio"],
+					null,
 					new Icono($_POST["slc-icono"],5,5),
 					$_POST["categorias"],//Categorias, esto es un arregla
 					null,//Estatus
@@ -41,6 +41,7 @@
 			echo "Categorias: " . var_dump($_POST["categorias"]);
 
 			$aplicacion->guardarRegistro($conexion);
+			$conexion->cerrarConexion();
 			break;
 		case '2': //Generar lista de aplicaciones
 			include_once("../class/class_conexion.php");
@@ -70,13 +71,13 @@
 						Versión: <b><?php echo $fila["version"]; ?></b><br>
 						<a href="<?php echo $fila["url"]; ?>">Descargar</a>
 						<br>
-						<span class="glyphicon glyphicon-pencil" onclick="editarAplicacion(<?php echo $fila["codigo_aplicacion"]; ?>)" aria-hidden="true"></span>
-						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 
+						<a href="#" onclick="editarAplicacion(<?php echo $fila["codigo_aplicacion"]; ?>)" aria-hidden="true"><span class="glyphicon glyphicon-pencil" ></span></a>
+						<a href="#" onclick="eliminarAplicacion(<?php echo $fila["codigo_aplicacion"]; ?>)" aria-hidden="true"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 					</div>
 				</div>
 				<?php
 			}
-			
+			$conexion->cerrarConexion();
 			break;
 		case '3': //Editar registro, obtener informacion de una aplicacion seleccionada
 			include_once("../class/class_conexion.php");
@@ -97,6 +98,7 @@
 
 			$fila = $conexion->obtenerFila($resultado);
 			echo json_encode($fila);
+			$conexion->cerrarConexion();
 			break;
 	case '4': //Actualizar un registro
 		echo "Actualizar";
@@ -119,7 +121,7 @@
 					new Icono($_POST["slc-icono"],5,5),
 					null,//$_POST["categorias"],//Categorias, esto es un arregla
 					null,//Estatus
-					$_POST["txt-version"],
+					$_POST["txt-version"], 
 					$_POST["txt-fecha-actualizacion"],
 					new Desarrollador($_POST["slc-desarrollador"], null,null)
 			);
@@ -127,7 +129,16 @@
 			//echo "Categorias: " . var_dump($_POST["categorias"]);
 
 			$aplicacion->actualizarRegistro($conexion, $_POST["txt-codigo-aplicacion"]);
+			$conexion->cerrarConexion();
 		break;
+		case '5':
+			include_once("../class/class_conexion.php");
+			include_once("../class/class_producto.php");
+			include_once("../class/class_aplicacion.php");
+			$conexion = new Conexion();
+			Aplicacion::eliminarAplicacion($conexion, $_POST["codigo_aplicacion"]);
+			$conexion->cerrarConexion();
+			break;
 	default:
 			# code...
 			break;

@@ -24,6 +24,23 @@ function editarAplicacion(codigoAplicacion){
 			}
 	});
 } 	
+
+function eliminarAplicacion(codigoAplicacion){
+	alert(codigoAplicacion);
+	$.ajax({
+			url:"ajax/acciones.php?accion=5",
+			method: "POST",
+			data: "codigo_aplicacion="+codigoAplicacion,
+			dataType: 'html',
+			success:function(resultado){
+				$("#resultado").html(resultado);
+				cargarTarjetas();
+			},
+			error:function(){
+
+			}
+	});
+}
 $(document).ready(function(){
 	$("#btn-cancelar").click(function(){
 		$("#txt-aplicacion").val('');

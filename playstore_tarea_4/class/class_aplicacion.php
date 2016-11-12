@@ -188,6 +188,33 @@
 				}
 			}*/
 		}
+
+		public static function eliminarAplicacion($conexion, $codigoAplicacion){
+			$resultado = $conexion->ejecutarInstruccion(
+				sprintf(
+					"DELETE FROM tbl_categorias_x_aplicacion
+					WHERE codigo_aplicacion = '%s'",
+					stripslashes($codigoAplicacion))
+			);
+
+			if ($resultado)
+				echo "Registros de categorias relacionados con el codigo de aplicacion".$codigoAplicacion." eliminados";
+			else 
+				echo "Error al eliminar categorias relacionadas al registro con codigo ".$codigoAplicacion;
+
+			$resultado = $conexion->ejecutarInstruccion(
+				sprintf(
+					"DELETE FROM tbl_aplicaciones 
+					WHERE codigo_aplicacion = '%s'",
+					stripslashes($codigoAplicacion))
+			);
+
+
+			if ($resultado)
+				echo "Registro con el codigo de aplicacion".$codigoAplicacion." eliminado";
+			else 
+				echo "Error al eliminar registro con codigo ".$codigoAplicacion;
+		}
 	}
 
 	
