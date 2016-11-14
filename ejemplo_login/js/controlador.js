@@ -7,10 +7,15 @@ $(document).ready(function(){
 				url:"ajax/acciones_login.php?accion=1",
 				method: "POST",
 				data: parametros,
-				dataType: 'html	',
-				success:function(resultado){
-					alert(resultado);
+				dataType: 'json	',
+				success:function(respuesta){
+					$("#resultado").html(respuesta.resultado + "Tipo Usuario: " + respuesta.codigo_tipo_usuario);
+					if(respuesta.codigo_tipo_usuario =='1')
+						window.location="pagina_cajero.php";
+					else if(respuesta.codigo_tipo_usuario =='2')
+						window.location="pagina_admin.php";
 				},
+
 				error:function(){
 
 				}

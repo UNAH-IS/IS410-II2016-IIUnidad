@@ -36,7 +36,7 @@
         </div>
         <button id="btn-login" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </div>
-
+      <div id="resultado"></div>
     </div> <!-- /container -->
 
 
